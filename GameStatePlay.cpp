@@ -4,6 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "GameStatePlay.h"
+#include <iostream>
 
 void GameStatePlay::draw(const float dt) {
     this->game->window.clear(sf::Color::Black);
@@ -71,5 +72,12 @@ GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0), game->texM
     pos *= 0.5f;
     this->guiView.setCenter(pos);
     this->gameView.setCenter(pos);
+
+    this->loadMap();
+}
+
+void GameStatePlay::loadMap() {
     this->map = new Map(50, 50, this->game->tileSize);
+
+    this->map->createTile(5, 5, Tile::ROCK);
 }

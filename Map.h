@@ -11,6 +11,10 @@ class Map {
 public:
     bool isCollideable(float x, float y);
 
+    Tile * getTile(int x, int y);
+
+    void createTile(int x, int y, Tile::tileType type);
+
     Map(int width, int height, int tileSize);
 
     ~Map();
@@ -18,7 +22,7 @@ private:
     int width;
     int height;
     int tileSize;
-    Tile **arr = nullptr;
+    Tile ***arr = nullptr;
 };
 
 

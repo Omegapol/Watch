@@ -5,9 +5,14 @@
 #ifndef WATCH_TILE_H
 #define WATCH_TILE_H
 
-
 class Tile {
+public:
+    enum tileType {
+        GRASS,
+        ROCK,
+    };
 
+    Tile() {}
 };
 
 

@@ -26,6 +26,8 @@ private:
     sf::View guiView;
     Player player;
     Map * map;
+
+    void loadMap();
 };
 
 

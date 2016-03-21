@@ -25,7 +25,7 @@ void Player::move() {
 void Player::update(float dt, Map *map) {
     sf::Vector2f offset = sf::Vector2f(this->moveVec.x * this->playerSpeed * dt,
                                        this->moveVec.y * this->playerSpeed * dt);
-    if (map->isCollideable(0, this->pos.y + offset.y)) {
+    if (map->isCollideable(this->pos.x + offset.x, this->pos.y + offset.y)) {
         this->moveVec = sf::Vector2f(0, 0);
         return;
     }
