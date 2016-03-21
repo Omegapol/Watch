@@ -13,14 +13,16 @@ void GameStatePlay::draw(const float dt) {
     textX.setFont(this->game->font);
     textX.setCharacterSize(24);
     textX.setColor(sf::Color::White);
-    textX.setString(std::to_string(this->player.getX()));
+    textX.setString(std::to_string(this->player.getX()) + ", tile X: " +
+                    std::to_string(int(this->player.getX()) / this->game->tileSize));
     this->game->window.draw(textX);
     sf::Text textY;
     textY.setFont(this->game->font);
     textY.setCharacterSize(24);
     textY.setColor(sf::Color::White);
     textY.setPosition(sf::Vector2f(0, 30));
-    textY.setString(std::to_string(this->player.getY()));
+    textY.setString(std::to_string(this->player.getY()) + ", tile Y: " +
+                    std::to_string(int(this->player.getY()) / this->game->tileSize));
     this->game->window.draw(textY);
     // DEBUG END
 
@@ -30,7 +32,7 @@ void GameStatePlay::draw(const float dt) {
 }
 
 void GameStatePlay::update(const float dt) {
-    player.update(dt);
+    player.update(dt, this->map);
 
     return;
 }
@@ -40,7 +42,7 @@ void GameStatePlay::handleInput() {
 
     player.move();
 
-    while(this->game->window.pollEvent(event)) {
+    while (this->game->window.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed: {
                 this->game->window.close();
@@ -55,7 +57,8 @@ void GameStatePlay::handleInput() {
 //            case sf::Event::KeyPressed: {
 //                if (event.key.code == sf::Keyboard::Escape) this->game->popState();
 //            }
-            default: break;
+            default:
+                break;
         }
     }
 }
@@ -68,4 +71,5 @@ GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0), game->texM
     pos *= 0.5f;
     this->guiView.setCenter(pos);
     this->gameView.setCenter(pos);
+    this->map = new Map(50, 50, this->game->tileSize);
 }

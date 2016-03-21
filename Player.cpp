@@ -22,18 +22,24 @@ void Player::move() {
     this->moveVec += offsetVec;
 }
 
-void Player::update(float dt) {
-    sf::Vector2f offset = sf::Vector2f(moveVec.x * playerSpeed * dt, moveVec.y * playerSpeed * dt);
-    sprite.move(offset);
+void Player::update(float dt, Map *map) {
+    sf::Vector2f offset = sf::Vector2f(this->moveVec.x * this->playerSpeed * dt,
+                                       this->moveVec.y * this->playerSpeed * dt);
+    if (map->isCollideable(0, this->pos.y + offset.y)) {
+        this->moveVec = sf::Vector2f(0, 0);
+        return;
+    }
+    this->sprite.move(offset);
     this->pos += offset;
-    moveVec = sf::Vector2f(0, 0);
+    this->moveVec = sf::Vector2f(0, 0);
+    return;
 }
 
 Player::Player(sf::Vector2f pos, sf::Texture &texture) : pos(pos), tex(texture) {
-    sprite.setTexture(tex);
-    sprite.setPosition(pos);
+    this->sprite.setTexture(this->tex);
+    this->sprite.setPosition(pos);
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    window.draw(sprite);
+    window.draw(this->sprite);
 }

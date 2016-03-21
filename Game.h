@@ -18,6 +18,7 @@ public:
     TextureManager texMgr;
     sf::Sprite background;
     sf::Font font;
+    int const tileSize = 16;
 
     void pushState(GameState *state);
 

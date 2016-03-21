@@ -6,6 +6,7 @@
 #define WATCH_PLAYER_H
 
 #include "SFML/Graphics.hpp"
+#include "Map.h"
 
 class Player {
 public:
@@ -19,7 +20,7 @@ public:
         return pos.y;
     }
 
-    void update(float dt);
+    void update(float dt, Map * map);
 
     void draw(sf::RenderWindow &window);
 

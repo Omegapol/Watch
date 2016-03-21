@@ -9,6 +9,7 @@
 
 #include "GameState.h"
 #include "Player.h"
+#include "Map.h"
 
 class GameStatePlay : public GameState {
 public:
@@ -18,12 +19,13 @@ public:
 
     virtual void handleInput();
 
-    GameStatePlay(Game * game);
+    GameStatePlay(Game *game);
 
 private:
     sf::View gameView;
     sf::View guiView;
     Player player;
+    Map * map;
 };
 
 
