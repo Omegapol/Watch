@@ -8,6 +8,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "GameState.h"
+#include "Player.h"
 
 class GameStatePlay : public GameState {
 public:
@@ -22,6 +23,7 @@ public:
 private:
     sf::View gameView;
     sf::View guiView;
+    Player player;
 };
 
 

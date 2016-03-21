@@ -2,20 +2,43 @@
 // Created by Łukasz on 2016-03-20.
 //
 
+#include "SFML/Graphics.hpp"
 #include "GameStatePlay.h"
 
 void GameStatePlay::draw(const float dt) {
-    this->game->window.draw(this->game->background);
+    this->game->window.clear(sf::Color::Black);
+
+    // DEBUG: SHOW X Y PLAYER POS
+    sf::Text textX;
+    textX.setFont(this->game->font);
+    textX.setCharacterSize(24);
+    textX.setColor(sf::Color::White);
+    textX.setString(std::to_string(this->player.getX()));
+    this->game->window.draw(textX);
+    sf::Text textY;
+    textY.setFont(this->game->font);
+    textY.setCharacterSize(24);
+    textY.setColor(sf::Color::White);
+    textY.setPosition(sf::Vector2f(0, 30));
+    textY.setString(std::to_string(this->player.getY()));
+    this->game->window.draw(textY);
+    // DEBUG END
+
+    player.draw(this->game->window);
 
     return;
 }
 
 void GameStatePlay::update(const float dt) {
+    player.update(dt);
+
     return;
 }
 
 void GameStatePlay::handleInput() {
     sf::Event event;
+
+    player.move();
 
     while(this->game->window.pollEvent(event)) {
         switch (event.type) {
@@ -29,15 +52,15 @@ void GameStatePlay::handleInput() {
                 break;
                 // TODO: Dokończyć później
             }
-            case sf::Event::KeyPressed: {
-                if (event.key.code == sf::Keyboard::Escape) this->game->popState();
-            }
+//            case sf::Event::KeyPressed: {
+//                if (event.key.code == sf::Keyboard::Escape) this->game->popState();
+//            }
             default: break;
         }
     }
 }
 
-GameStatePlay::GameStatePlay(Game *game) {
+GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0), game->texMgr.getRef("player")) {
     this->game = game;
     sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
     this->guiView.setSize(pos);

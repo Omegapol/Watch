@@ -1,9 +1,6 @@
 //
 // Created by Łukasz on 2016-03-20.
 //
-
-#include <stack>
-
 #include "Game.h"
 #include "GameState.h"
 
@@ -59,6 +56,8 @@ Game::Game() {
     this->window.setFramerateLimit(60);
 
     this->background.setTexture(this->texMgr.getRef("background"));
+
+    this->font.loadFromFile("assets/fonts/OpenSans-Light.ttf");
 }
 
 Game::~Game() {
@@ -68,4 +67,5 @@ Game::~Game() {
 
 void Game::loadTextures() {
     texMgr.loadTexture("background", "assets/textures/background.png");
+    texMgr.loadTexture("player", "assets/textures/player.png");
 }

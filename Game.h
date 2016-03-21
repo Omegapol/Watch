@@ -17,6 +17,7 @@ public:
     sf::RenderWindow window;
     TextureManager texMgr;
     sf::Sprite background;
+    sf::Font font;
 
     void pushState(GameState *state);
 
