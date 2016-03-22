@@ -1,13 +1,13 @@
 //
 // Created by Łukasz on 2016-03-21.
 //
-
+#include "DMemoryLeaks.h"
 #include "Tile.h"
 
 Tile::Tile(int x, int y, Tile::tileType type) : type(type), x(x), y(y) {
     switch(type) {
         case ROCK: {
-            this->tex = Storage::texMgr.getRef("rock-texture");
+            this->tex = TextureManager::getRef("rock-texture");
             break;
         }
         case GRASS: {

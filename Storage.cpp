@@ -5,6 +5,6 @@
 #include "Storage.h"
 
 namespace Storage {
-    TextureManager texMgr = TextureManager();
+    //TextureManager texMgr = TextureManager();
     int const tileSize = 16;
 }

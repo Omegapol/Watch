@@ -42,7 +42,7 @@ void Player::update(float dt, Map *map) {
 }
 
 Player::Player(sf::Vector2f pos) : pos(pos) {
-    this->tex = Storage::texMgr.getRef("player");
+    this->tex = TextureManager::getRef("player");
     this->sprite.setTexture(this->tex, true);
     this->sprite.setPosition(pos);
 }

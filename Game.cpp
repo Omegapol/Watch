@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "GameState.h"
 
+#include "DMemoryLeaks.h"
+
 void Game::pushState(GameState *state) {
     this->states.push(state);
 
@@ -50,12 +52,13 @@ void Game::gameLoop() {
 }
 
 Game::Game() {
+	TextureManager::setTexStorage(new std::map<std::string, sf::Texture>);
     this->loadTextures();
 
     this->window.create(sf::VideoMode(1280, 720), "Watch");
     this->window.setFramerateLimit(60);
 
-    this->background.setTexture(Storage::texMgr.getRef("background"));
+    this->background.setTexture(TextureManager::getRef("background"));
 
     this->font.loadFromFile("assets/fonts/OpenSans-Light.ttf");
 }
@@ -63,10 +66,11 @@ Game::Game() {
 Game::~Game() {
     while (!this->states.empty())
         popState();
+	TextureManager::destroyTexStorage();
 }
 
 void Game::loadTextures() {
-    Storage::texMgr.loadTexture("background", "assets/textures/background.png");
-    Storage::texMgr.loadTexture("player", "assets/textures/player.png");
-    Storage::texMgr.loadTexture("rock-texture", "assets/textures/rock-texture.png");
+    TextureManager::loadTexture("background", "assets/textures/background.png");
+	TextureManager::loadTexture("player", "assets/textures/player.png");
+	TextureManager::loadTexture("rock-texture", "assets/textures/rock-texture.png");
 }
