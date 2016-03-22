@@ -9,7 +9,7 @@
 
 class Map {
 public:
-    bool isCollideable(float x, float y);
+    bool isCollideable(float x, float y, const sf::FloatRect &playerBounds);
 
     Tile *getTile(int x, int y);
 

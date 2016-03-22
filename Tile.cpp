@@ -14,10 +14,14 @@ Tile::Tile(int x, int y, Tile::tileType type) : type(type), x(x), y(y) {
             break;
         }
     }
-    this->sprite.setTexture(this->tex);
+    this->sprite.setTexture(this->tex, true);
     this->sprite.setPosition(this->x * Storage::tileSize, this->y * Storage::tileSize);
 }
 
 void Tile::draw(sf::RenderWindow &window) {
     window.draw(this->sprite);
+}
+
+sf::FloatRect Tile::getGlobalBounds() {
+    return this->sprite.getGlobalBounds();
 }

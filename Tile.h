@@ -17,6 +17,8 @@ public:
 
     void draw(sf::RenderWindow &window);
 
+    sf::FloatRect getGlobalBounds();
+
     Tile(int x, int y, Tile::tileType type);
 
 private:

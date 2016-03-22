@@ -80,4 +80,12 @@ void GameStatePlay::loadMap() {
     this->map = new Map(50, 50);
 
     this->map->createTile(5, 5, Tile::ROCK);
+    this->map->createTile(6, 5, Tile::ROCK);
+    this->map->createTile(7, 5, Tile::ROCK);
+    this->map->createTile(8, 5, Tile::ROCK);
+    this->map->createTile(9, 5, Tile::ROCK);
+    this->map->createTile(10, 5, Tile::ROCK);
+    this->map->createTile(11, 5, Tile::ROCK);
+    this->map->createTile(12, 5, Tile::ROCK);
+    this->map->createTile(13, 5, Tile::ROCK);
 }

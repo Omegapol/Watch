@@ -25,7 +25,10 @@ void Player::move() {
 void Player::update(float dt, Map *map) {
     sf::Vector2f offset = sf::Vector2f(this->moveVec.x * this->playerSpeed * dt,
                                        this->moveVec.y * this->playerSpeed * dt);
-    if (map->isCollideable(this->pos.x + offset.x, this->pos.y + offset.y)) {
+    sf::Sprite futurePos = this->sprite;
+    futurePos.move(offset);
+    if (map->isCollideable(this->pos.x, this->pos.y, futurePos.getGlobalBounds()))
+    {
         this->moveVec = sf::Vector2f(0, 0);
         return;
     }
@@ -37,7 +40,7 @@ void Player::update(float dt, Map *map) {
 
 Player::Player(sf::Vector2f pos) : pos(pos) {
     this->tex = Storage::texMgr.getRef("player");
-    this->sprite.setTexture(this->tex);
+    this->sprite.setTexture(this->tex, true);
     this->sprite.setPosition(pos);
 }
 

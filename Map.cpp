@@ -28,8 +28,20 @@ Tile *Map::getTile(int x, int y) {
     return arr[x][y];
 }
 
-bool Map::isCollideable(float x, float y) {
-    return getTile(int(x) / Storage::tileSize, int(y) / Storage::tileSize) != nullptr;
+bool Map::isCollideable(float x, float y, const sf::FloatRect &playerBounds) {
+    int startX = int(x) / Storage::tileSize;
+    int startY = int(y) / Storage::tileSize;
+    Tile *tile;
+    for (int i = startX - 10; i <= startX + 10; ++i) {
+        for (int j = startY - 10; j <= startY + 10; ++j) {
+            if (i >= 0 && j >= 0) {
+                tile = getTile(i, j);
+                if (tile != nullptr && playerBounds.intersects(tile->getGlobalBounds()))
+                    return true;
+            }
+        }
+    }
+    return false;
 }
 
 void Map::createTile(int x, int y, Tile::tileType type) {
