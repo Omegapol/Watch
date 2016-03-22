@@ -12,14 +12,18 @@
 class TextureManager {
 public:
 
-    void loadTexture(const std::string name, const std::string filename);
+    static void loadTexture(const std::string name, const std::string filename);
 
-    sf::Texture &getRef(const std::string textureName);
+    static sf::Texture &getRef(const std::string textureName);
+
+	static void setTexStorage(std::map<std::string, sf::Texture>* tex);
+	static void destroyTexStorage();
 
     TextureManager() { }
+	//~TextureManager();
 
 private:
-    std::map<std::string, sf::Texture> textures;
+    static std::map<std::string, sf::Texture>* textures;
 };
 
 
