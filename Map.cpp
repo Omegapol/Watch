@@ -28,15 +28,17 @@ Tile *Map::getTile(int x, int y) {
     return arr[x][y];
 }
 
-bool Map::isCollideable(float x, float y, const sf::FloatRect &playerBounds) {
+bool Map::isCollideable(float x, float y, const sf::Sprite &object, sf::Vector2f offset) {
     int startX = int(x) / Storage::tileSize;
     int startY = int(y) / Storage::tileSize;
     Tile *tile;
+    sf::Sprite temp = object;
+    temp.move(offset);
     for (int i = startX - 10; i <= startX + 10; ++i) {
         for (int j = startY - 10; j <= startY + 10; ++j) {
             if (i >= 0 && j >= 0) {
                 tile = getTile(i, j);
-                if (tile != nullptr && playerBounds.intersects(tile->getGlobalBounds()))
+                if (tile != nullptr && temp.getGlobalBounds().intersects(tile->getGlobalBounds()))
                     return true;
             }
         }

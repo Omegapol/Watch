@@ -23,14 +23,17 @@ void Player::move() {
 }
 
 void Player::update(float dt, Map *map) {
+    int repeats = 0;
     sf::Vector2f offset = sf::Vector2f(this->moveVec.x * this->playerSpeed * dt,
                                        this->moveVec.y * this->playerSpeed * dt);
     sf::Sprite futurePos = this->sprite;
-    futurePos.move(offset);
-    if (map->isCollideable(this->pos.x, this->pos.y, futurePos.getGlobalBounds()))
-    {
-        this->moveVec = sf::Vector2f(0, 0);
-        return;
+    while (map->isCollideable(this->pos.x, this->pos.y, futurePos, offset)) {
+        offset = 0.7f * offset;
+        repeats++;
+        if (repeats > 5) {
+            this->moveVec = sf::Vector2f(0, 0);
+            return;
+        }
     }
     this->sprite.move(offset);
     this->pos += offset;
