@@ -11,6 +11,7 @@
 
 class TextureManager {
 public:
+
     void loadTexture(const std::string name, const std::string filename);
 
     sf::Texture &getRef(const std::string textureName);

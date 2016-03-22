@@ -55,7 +55,7 @@ Game::Game() {
     this->window.create(sf::VideoMode(1280, 720), "Watch");
     this->window.setFramerateLimit(60);
 
-    this->background.setTexture(this->texMgr.getRef("background"));
+    this->background.setTexture(Storage::texMgr.getRef("background"));
 
     this->font.loadFromFile("assets/fonts/OpenSans-Light.ttf");
 }
@@ -66,6 +66,7 @@ Game::~Game() {
 }
 
 void Game::loadTextures() {
-    texMgr.loadTexture("background", "assets/textures/background.png");
-    texMgr.loadTexture("player", "assets/textures/player.png");
+    Storage::texMgr.loadTexture("background", "assets/textures/background.png");
+    Storage::texMgr.loadTexture("player", "assets/textures/player.png");
+    Storage::texMgr.loadTexture("rock-texture", "assets/textures/rock-texture.png");
 }

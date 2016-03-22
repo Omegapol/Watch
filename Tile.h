@@ -5,6 +5,9 @@
 #ifndef WATCH_TILE_H
 #define WATCH_TILE_H
 
+#include "SFML/Graphics.hpp"
+#include "Storage.h"
+
 class Tile {
 public:
     enum tileType {
@@ -12,7 +15,16 @@ public:
         ROCK,
     };
 
-    Tile() {}
+    void draw(sf::RenderWindow &window);
+
+    Tile(int x, int y, Tile::tileType type);
+
+private:
+    tileType type;
+    sf::Texture tex;
+    sf::Sprite sprite;
+    int x;
+    int y;
 };
 
 

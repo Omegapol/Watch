@@ -4,7 +4,6 @@
 
 #include "SFML/Graphics.hpp"
 #include "GameStatePlay.h"
-#include <iostream>
 
 void GameStatePlay::draw(const float dt) {
     this->game->window.clear(sf::Color::Black);
@@ -15,7 +14,7 @@ void GameStatePlay::draw(const float dt) {
     textX.setCharacterSize(24);
     textX.setColor(sf::Color::White);
     textX.setString(std::to_string(this->player.getX()) + ", tile X: " +
-                    std::to_string(int(this->player.getX()) / this->game->tileSize));
+                    std::to_string(int(this->player.getX()) / Storage::tileSize));
     this->game->window.draw(textX);
     sf::Text textY;
     textY.setFont(this->game->font);
@@ -23,11 +22,12 @@ void GameStatePlay::draw(const float dt) {
     textY.setColor(sf::Color::White);
     textY.setPosition(sf::Vector2f(0, 30));
     textY.setString(std::to_string(this->player.getY()) + ", tile Y: " +
-                    std::to_string(int(this->player.getY()) / this->game->tileSize));
+                    std::to_string(int(this->player.getY()) / Storage::tileSize));
     this->game->window.draw(textY);
     // DEBUG END
 
-    player.draw(this->game->window);
+    this->player.draw(this->game->window);
+    this->map->draw(this->game->window);
 
     return;
 }
@@ -64,7 +64,7 @@ void GameStatePlay::handleInput() {
     }
 }
 
-GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0), game->texMgr.getRef("player")) {
+GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0)) {
     this->game = game;
     sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
     this->guiView.setSize(pos);
@@ -77,7 +77,7 @@ GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0), game->texM
 }
 
 void GameStatePlay::loadMap() {
-    this->map = new Map(50, 50, this->game->tileSize);
+    this->map = new Map(50, 50);
 
     this->map->createTile(5, 5, Tile::ROCK);
 }

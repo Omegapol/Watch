@@ -24,7 +24,7 @@ public:
 
     void draw(sf::RenderWindow &window);
 
-    Player(sf::Vector2f pos, sf::Texture &texture);
+    Player(sf::Vector2f pos);
 
 private:
     sf::Vector2f pos;

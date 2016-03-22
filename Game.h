@@ -8,6 +8,7 @@
 #include <stack>
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
+#include "Storage.h"
 
 class GameState;
 
@@ -15,10 +16,8 @@ class Game {
 public:
     std::stack<GameState *> states;
     sf::RenderWindow window;
-    TextureManager texMgr;
     sf::Sprite background;
     sf::Font font;
-    int const tileSize = 16;
 
     void pushState(GameState *state);
 
