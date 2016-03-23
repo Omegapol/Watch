@@ -4,6 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "GameStatePlay.h"
+	#include "DMemoryLeaks.h"
 
 void GameStatePlay::draw(const float dt) {
     this->game->window.clear(sf::Color::Black);
@@ -74,6 +75,11 @@ GameStatePlay::GameStatePlay(Game *game) : player(sf::Vector2f(0, 0)) {
     this->gameView.setCenter(pos);
 
     this->loadMap();
+}
+
+GameStatePlay::~GameStatePlay()
+{
+	if (map != NULL) delete map;
 }
 
 void GameStatePlay::loadMap() {

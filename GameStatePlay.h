@@ -19,7 +19,8 @@ public:
 
     virtual void handleInput();
 
-    GameStatePlay(Game *game);
+	GameStatePlay(Game *game);
+	~GameStatePlay();
 
 private:
     sf::View gameView;

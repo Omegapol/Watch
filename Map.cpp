@@ -4,6 +4,7 @@
 
 #include "Map.h"
 #include "Game.h"
+	#include "DMemoryLeaks.h"
 
 Map::Map(int width, int height) : width(width), height(height) {
     arr = new Tile **[height];
@@ -18,6 +19,11 @@ Map::Map(int width, int height) : width(width), height(height) {
 }
 
 Map::~Map() {
+	for (int i = 0; i < height; ++i) {
+		for (int j = 0; j < width; ++j) {
+			if(this->arr[i][j]!=NULL) delete this->arr[i][j];
+		}
+	}
     for (int i = 0; i < this->height; ++i) {
         delete[] this->arr[i];
     }
